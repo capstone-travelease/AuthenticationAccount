@@ -5,9 +5,9 @@ server:
 
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/travelmarketplace
-    username: root
-    password: password
+    url: jdbc:postgresql://34.142.141.98:5432/capstone
+    username: postgres
+    password: capstonevlu
   jpa:
     hibernate:
       ddl-auto: create-drop
