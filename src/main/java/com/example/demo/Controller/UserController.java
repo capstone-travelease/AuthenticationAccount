@@ -7,14 +7,10 @@ import com.example.demo.Services.UserService;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+
 
 @RestController
 @RequestMapping(path = "/user")
@@ -26,24 +22,20 @@ public class UserController {
     @PostMapping(path = "/signup")
     public HashMap SignUp(@RequestBody @Valid UserRequestDTO request, HttpServletResponse response, BindingResult bindingResult){
         HashMap responseData = new HashMap<>();
-        responseData.put("code",response.getStatus());
-        responseData.put("data", userService.SignUpService(request));
-        responseData.put("message","Successfully");
-        return responseData;
-        HashMap responeData = new HashMap<>();
         var userReponse = userService.SignUpService(request);
         if(userReponse.isEmpty()){
             response.setStatus(409);
-            responeData.put("code",response.getStatus());
-            responeData.put("data",userReponse);
-            responeData.put("message","Email already exists");
-            return responeData;
+            responseData.put("code",response.getStatus());
+            responseData.put("data",userReponse);
+            responseData.put("message","Email already exists");
+            return responseData;
         }
-        responeData.put("code",response.getStatus());
-        responeData.put("data", userReponse);
-        responeData.put("message","Seccessful");
 
-        return responeData;
+        responseData.put("code",response.getStatus());
+        responseData.put("data", userReponse);
+        responseData.put("message","Ok");
+
+        return responseData;
     }
 
     @PostMapping(path = "/login")
@@ -59,7 +51,7 @@ public class UserController {
         }
         responseData.put("code",response.getStatus());
         responseData.put("data", serviceData);
-        responseData.put("message","Successful");
+        responseData.put("message","Ok");
         return responseData;
     }
 }
