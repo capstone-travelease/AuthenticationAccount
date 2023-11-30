@@ -25,6 +25,11 @@ public class UserController {
 
     @PostMapping(path = "/signup")
     public HashMap SignUp(@RequestBody @Valid UserRequestDTO request, HttpServletResponse response, BindingResult bindingResult){
+        HashMap responseData = new HashMap<>();
+        responseData.put("code",response.getStatus());
+        responseData.put("data", userService.SignUpService(request));
+        responseData.put("message","Successfully");
+        return responseData;
         HashMap responeData = new HashMap<>();
         var userReponse = userService.SignUpService(request);
         if(userReponse.isEmpty()){
@@ -44,17 +49,17 @@ public class UserController {
     @PostMapping(path = "/login")
     public HashMap Login(@RequestBody @Valid AuthenticationRequestDTO request, HttpServletResponse response){
         var serviceData = authenticationService.authenticate(request);
-        HashMap responeData = new HashMap<>();
+        HashMap responseData = new HashMap<>();
         if(serviceData.isEmpty()){
             response.setStatus(401);
-            responeData.put("code",response.getStatus());
-            responeData.put("data", serviceData);
-            responeData.put("message","Wrong password or email");
-            return responeData;
+            responseData.put("code",response.getStatus());
+            responseData.put("data", serviceData);
+            responseData.put("message","Wrong password or email");
+            return responseData;
         }
-        responeData.put("code",response.getStatus());
-        responeData.put("data", serviceData);
-        responeData.put("message","Sucessful");
-        return responeData;
+        responseData.put("code",response.getStatus());
+        responseData.put("data", serviceData);
+        responseData.put("message","Successful");
+        return responseData;
     }
 }
