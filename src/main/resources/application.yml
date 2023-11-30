@@ -1,0 +1,20 @@
+server:
+  port: 1234
+  error:
+    include-message: always
+
+spring:
+  datasource:
+    url: jdbc:postgresql://34.142.141.98:5432/capstone
+    username: postgres
+    password: capstonevlu
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate:
+        jdbc:
+          lob:
+            non_contextual_creation: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
