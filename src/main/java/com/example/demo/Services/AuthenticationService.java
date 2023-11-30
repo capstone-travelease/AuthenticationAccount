@@ -16,8 +16,8 @@ import java.util.Map;
 public class AuthenticationService {
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
-
     private final UserRepository repository;
+
     public Map<String,String> authenticate(AuthenticationRequestDTO request) {
         HashMap<String,String> map = new HashMap<>();
         var idUser = repository.findByName(request.getEmail());
@@ -35,8 +35,6 @@ public class AuthenticationService {
         catch (Exception ex){
             System.out.print(ex);
         }
-
-
         var user = repository.findByUserName(request.getEmail()).orElseThrow();
         var jwtToken= jwtService.generateToken(user);
         map.put("token",jwtToken);
