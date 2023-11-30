@@ -1,11 +1,11 @@
 server:
-  port: 1234
+  port: 8080
   error:
     include-message: always
 
 spring:
   datasource:
-    url: jdbc:postgresql://34.142.141.98:5432/capstone
+    url: jdbc:postgresql://34.142.141.98:5432/travelmarketplace
     username: postgres
     password: capstonevlu
   jpa:

@@ -28,7 +28,7 @@ public class UserController {
         HashMap responeData = new HashMap<>();
         responeData.put("code",response.getStatus());
         responeData.put("data", userService.SignUpService(request));
-        responeData.put("message","Wrong password or email");
+        responeData.put("message","Seccessfully");
         return responeData;
     }
 
