@@ -26,9 +26,18 @@ public class UserController {
     @PostMapping(path = "/signup")
     public HashMap SignUp(@RequestBody @Valid UserRequestDTO request, HttpServletResponse response, BindingResult bindingResult){
         HashMap responeData = new HashMap<>();
+        var userReponse = userService.SignUpService(request);
+        if(userReponse.isEmpty()){
+            response.setStatus(409);
+            responeData.put("code",response.getStatus());
+            responeData.put("data",userReponse);
+            responeData.put("message","Email already exists");
+            return responeData;
+        }
         responeData.put("code",response.getStatus());
-        responeData.put("data", userService.SignUpService(request));
-        responeData.put("message","Seccessfully");
+        responeData.put("data", userReponse);
+        responeData.put("message","Seccessful");
+
         return responeData;
     }
 

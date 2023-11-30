@@ -21,7 +21,6 @@ public class UserService {
         HashMap<String,String> userReturn = new HashMap<>();
       var userData = userRepository.findByEmail(UserRequest.getEmail());
       if(userData.isPresent()){
-          userReturn.put("data","Failure");
            return userReturn;
        }
         var user = new UserEnity(
