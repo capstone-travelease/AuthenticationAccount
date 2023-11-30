@@ -1,15 +1,13 @@
 package com.example.demo.DTO;
 
+
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.RequiredArgsConstructor;
-
-import java.util.Map;
 
 @AllArgsConstructor
 @Data
-public class AuthenticationResponeDTO {
+public class ErrResponeDTO {
     private Integer code;
-    private Map data;
     private String message;
 }

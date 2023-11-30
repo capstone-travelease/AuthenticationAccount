@@ -24,8 +24,8 @@ public class UserService {
           userReturn.put("data","Failure");
            return userReturn;
        }
-
         var user = new UserEnity(
+              null,
                 UserRequest.getEmail(),
                 UserRequest.getPhonenumber(),
                 UserRequest.getName(),

@@ -10,13 +10,17 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.Date;
 
-@Table(name ="Indivuals")
+@Table(name ="Individuals")
 @Entity
 @AllArgsConstructor
 @RequiredArgsConstructor
 public class UserEnity implements UserDetails {
 
         @Id
+        @Column(name = "user_id")
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        private Integer id;
+
         @Column(name = "email")
         private String email;
 
