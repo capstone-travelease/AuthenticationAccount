@@ -23,7 +23,7 @@ public class UserService {
       if(userData.isPresent()){
            return userReturn;
        }
-        var user = new UserEnity(
+      var user = new UserEnity(
               null,
                 UserRequest.getEmail(),
                 UserRequest.getPhonenumber(),
@@ -33,12 +33,12 @@ public class UserService {
                 null,
                 null,
                 3
-        );
-        userRepository.save(user);
-        userReturn.put("email",UserRequest.getEmail());
-        userReturn.put("phone", String.valueOf(UserRequest.getPhonenumber()));
-        userReturn.put("name", UserRequest.getName());
-        userReturn.put("gender",String.valueOf(UserRequest.isGender()));
-        return userReturn;
+      );
+      userRepository.save(user);
+      userReturn.put("email",UserRequest.getEmail());
+      userReturn.put("phone", String.valueOf(UserRequest.getPhonenumber()));
+      userReturn.put("name", UserRequest.getName());
+      userReturn.put("gender",String.valueOf(UserRequest.isGender()));
+      return userReturn;
     }
 }

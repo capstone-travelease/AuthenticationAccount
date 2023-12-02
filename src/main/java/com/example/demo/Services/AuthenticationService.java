@@ -18,7 +18,7 @@ public class AuthenticationService {
     private final UserRepository repository;
 
     public Map authenticate(AuthenticationRequestDTO request) {
-        HashMap<String,String> map = new HashMap<>();
+        HashMap map = new HashMap<>();
         var idUser = repository.findByName(request.getEmail());
         if(idUser == null){
             return map;
