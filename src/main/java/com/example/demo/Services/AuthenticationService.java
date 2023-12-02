@@ -37,7 +37,7 @@ public class AuthenticationService {
         var user = repository.findByUserName(request.getEmail()).orElseThrow();
         var jwtToken= jwtService.generateToken(user);
         map.put("token",jwtToken);
-        map.put("iduser", idUser);
+        map.put("iduser", Integer.valueOf(idUser));
         return map;
     }
 }
