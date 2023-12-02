@@ -26,13 +26,11 @@ public class UserController {
         if(userReponse.isEmpty()){
             response.setStatus(409);
             responseData.put("code",response.getStatus());
-            responseData.put("data",userReponse);
             responseData.put("message","Email already exists");
             return responseData;
         }
 
         responseData.put("code",response.getStatus());
-        responseData.put("data", userReponse);
         responseData.put("message","Ok");
 
         return responseData;
@@ -45,12 +43,11 @@ public class UserController {
         if(serviceData.isEmpty()){
             response.setStatus(401);
             responseData.put("code",response.getStatus());
-            responseData.put("data", serviceData);
             responseData.put("message","Wrong password or email");
             return responseData;
         }
         responseData.put("code",response.getStatus());
-        responseData.put("data", serviceData);
+        responseData.put("data",serviceData);
         responseData.put("message","Ok");
         return responseData;
     }
