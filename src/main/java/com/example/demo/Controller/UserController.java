@@ -29,13 +29,11 @@ public class UserController {
             responseData.put("message","Email already exists");
             return responseData;
         }
-
         responseData.put("code",response.getStatus());
         responseData.put("message","Ok");
 
         return responseData;
     }
-
     @PostMapping(path = "/login")
     public HashMap Login(@RequestBody @Valid AuthenticationRequestDTO request, HttpServletResponse response){
         var serviceData = authenticationService.authenticate(request);
