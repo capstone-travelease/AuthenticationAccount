@@ -12,7 +12,7 @@ public class RoleEnity {
 
     @Id
     @GeneratedValue
-    private Integer id;
+    private Integer role_id;
 
     @Column(name = "role_name")
     private String rolename;
