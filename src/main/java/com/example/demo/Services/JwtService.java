@@ -4,6 +4,7 @@ import com.example.demo.Enities.UserEnity;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
@@ -30,7 +31,7 @@ public class JwtService {
                 .setSubject(userDetails.getUsername())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + 1000 * 24 * 60))
-                .signWith(SignatureAlgorithm.HS256,KEY_SECRET) // mã kiểu header và signature để cho ra 1 mã hoàn chỉnh
+                .signWith(getSignInKey(),SignatureAlgorithm.HS256) // mã kiểu header và signature để cho ra 1 mã hoàn chỉnh
                 .compact();
     }
 
@@ -43,7 +44,7 @@ public class JwtService {
     }
     private Claims extractAllClaim(String token){
         return Jwts.parserBuilder()
-                .setSigningKey(KEY_SECRET)
+                .setSigningKey(getSignInKey())
                 .build()
                 .parseClaimsJws(token)
                 .getBody();
@@ -54,7 +55,10 @@ public class JwtService {
         return (userName.equals(userDetails.getUsername())) && !isTokenExpired(token);
     }
 
-
+    public Key getSignInKey(){
+        byte[] keyBytes = Decoders.BASE64.decode(KEY_SECRET);
+        return  Keys.hmacShaKeyFor(keyBytes);
+    }
 
 }
 

@@ -22,10 +22,9 @@ public class UserService {
         HashMap<String,String> userReturn = new HashMap<>();
       var userData = userRepository.findByEmail(UserRequest.getEmail());
       if(userData.isPresent()){
-          userReturn.put("data","The email has been taken !");
            return userReturn;
        }
-        var user = new UserEnity(
+      var user = new UserEnity(
               null,
                 UserRequest.getEmail(),
                 UserRequest.getPhonenumber(),
