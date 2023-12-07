@@ -31,5 +31,7 @@ public class UserRequestDTO {
     @NotNull
     private boolean gender;
     private String birthday;
+
+    @NotNull
     private Integer role;
 }

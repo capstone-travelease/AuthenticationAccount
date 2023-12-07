@@ -10,7 +10,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.Date;
 
-@Table(name ="Individuals")
+@Table(name ="Users")
 @Entity
 @AllArgsConstructor
 @RequiredArgsConstructor
@@ -36,7 +36,7 @@ public class UserEnity implements UserDetails {
         @Column(name = "password")
         private String password;
 
-        @Column(name = "birthday")
+        @Column(name = "dob")
         private Date birthday;
 
         @Column(name = "avatar")

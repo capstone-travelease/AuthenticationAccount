@@ -4,6 +4,7 @@ import com.example.demo.DTO.UserRequestDTO;
 import com.example.demo.Enities.UserEnity;
 import com.example.demo.Repositories.UserRepository;
 import lombok.AllArgsConstructor;
+import org.apache.catalina.User;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -32,13 +33,14 @@ public class UserService {
                 new BCryptPasswordEncoder().encode(UserRequest.getEmail()),
                 null,
                 null,
-                3
-      );
-      userRepository.save(user);
-      userReturn.put("email",UserRequest.getEmail());
-      userReturn.put("phone", String.valueOf(UserRequest.getPhonenumber()));
-      userReturn.put("name", UserRequest.getName());
-      userReturn.put("gender",String.valueOf(UserRequest.isGender()));
-      return userReturn;
+                UserRequest.getRole()
+        );
+        userRepository.save(user);
+        userReturn.put("email",UserRequest.getEmail());
+        userReturn.put("phone", String.valueOf(UserRequest.getPhonenumber()));
+        userReturn.put("name", UserRequest.getName());
+        userReturn.put("gender",String.valueOf(UserRequest.isGender()));
+        userReturn.put("role", String.valueOf(UserRequest.getRole()));
+        return userReturn;
     }
 }
