@@ -32,6 +32,4 @@ public class UserRequestDTO {
     private boolean gender;
     private String birthday;
 
-    @NotNull
-    private Integer role;
 }

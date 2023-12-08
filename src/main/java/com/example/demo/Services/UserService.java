@@ -30,17 +30,16 @@ public class UserService {
                 UserRequest.getPhonenumber(),
                 UserRequest.getName(),
                 UserRequest.isGender(),
-                new BCryptPasswordEncoder().encode(UserRequest.getEmail()),
+                new BCryptPasswordEncoder().encode(UserRequest.getPassword()),
                 null,
                 null,
-                UserRequest.getRole()
+               3
         );
         userRepository.save(user);
         userReturn.put("email",UserRequest.getEmail());
         userReturn.put("phone", String.valueOf(UserRequest.getPhonenumber()));
         userReturn.put("name", UserRequest.getName());
         userReturn.put("gender",String.valueOf(UserRequest.isGender()));
-        userReturn.put("role", String.valueOf(UserRequest.getRole()));
         return userReturn;
     }
 }

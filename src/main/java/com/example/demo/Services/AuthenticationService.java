@@ -5,6 +5,7 @@ import com.example.demo.Repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -17,10 +18,12 @@ public class AuthenticationService {
     private final AuthenticationManager authenticationManager;
     private final UserRepository repository;
 
-    public Map authenticate(AuthenticationRequestDTO request) {
-        HashMap map = new HashMap<>();
+    public Map<String,Object> authenticate(AuthenticationRequestDTO request) {
+        HashMap<String, Object> map = new HashMap<>();
+        BCryptPasswordEncoder Bcryt = new BCryptPasswordEncoder();
         var idUser = repository.findByName(request.getEmail());
-        if(idUser == null){
+        boolean isCheck =  Bcryt.matches(request.getPassword(), idUser);
+        if(idUser.isEmpty() || !isCheck){
             return map;
         }
         try {
@@ -37,7 +40,7 @@ public class AuthenticationService {
         var user = repository.findByUserName(request.getEmail()).orElseThrow();
         var jwtToken= jwtService.generateToken(user);
         map.put("token",jwtToken);
-        map.put("iduser", Integer.valueOf(idUser));
+//        map.put("iduser", idUser.get("user_id"));
         return map;
     }
 }
