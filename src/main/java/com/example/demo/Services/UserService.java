@@ -18,28 +18,28 @@ import java.util.Map;
 public class UserService {
 
     private  final UserRepository userRepository;
-    public Map<String,String> SignUpService(UserRequestDTO UserRequest){
+    public Map<String,String> SignUpService(UserRequestDTO userRequest){
         HashMap<String,String> userReturn = new HashMap<>();
-      var userData = userRepository.findByEmail(UserRequest.getEmail());
+      var userData = userRepository.findByEmail(userRequest.getEmail());
       if(userData.isPresent()){
            return userReturn;
        }
       var user = new UserEnity(
               null,
-                UserRequest.getEmail(),
-                UserRequest.getPhonenumber(),
-                UserRequest.getName(),
-                UserRequest.isGender(),
-                new BCryptPasswordEncoder().encode(UserRequest.getPassword()),
+                userRequest.getEmail(),
+                userRequest.getPhonenumber(),
+                userRequest.getName(),
+                userRequest.isGender(),
+                new BCryptPasswordEncoder().encode(userRequest.getPassword()),
                 null,
                 null,
                3
         );
         userRepository.save(user);
-        userReturn.put("email",UserRequest.getEmail());
-        userReturn.put("phone", String.valueOf(UserRequest.getPhonenumber()));
-        userReturn.put("name", UserRequest.getName());
-        userReturn.put("gender",String.valueOf(UserRequest.isGender()));
+        userReturn.put("email",userRequest.getEmail());
+        userReturn.put("phone", String.valueOf(userRequest.getPhonenumber()));
+        userReturn.put("name", userRequest.getName());
+        userReturn.put("gender",String.valueOf(userRequest.isGender()));
         return userReturn;
     }
 }

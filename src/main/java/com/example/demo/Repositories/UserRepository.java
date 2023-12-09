@@ -15,6 +15,6 @@ public interface UserRepository extends JpaRepository<UserEnity,Integer> {
     @Query(value = "SELECT * FROM Users WHERE Users.email = ?1",nativeQuery = true)
     Optional<UserEnity> findByUserName(String email);
 
-    @Query(value = "SELECT password FROM Users WHERE Users.email = ?1",nativeQuery = true)
-    String findByName(String email);
+    @Query(value = "SELECT user_id,password FROM Users WHERE Users.email = ?1",nativeQuery = true)
+    Map<String,Object> findByName(String email);
 }
