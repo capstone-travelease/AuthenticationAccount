@@ -1,16 +1,16 @@
 server:
-  port: 8080
+  port: 1234
   error:
     include-message: always
 
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/TravelMarketPlace
+    url: jdbc:postgresql://35.247.161.13:5432/travelmarketplace
     username: postgres
-    password: 123456
+    password: capstonevlu
   jpa:
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: none
     properties:
       hibernate:
         jdbc:
