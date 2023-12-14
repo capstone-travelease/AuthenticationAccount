@@ -13,7 +13,7 @@ import java.util.HashMap;
 
 
 @RestController
-@RequestMapping(path = "/user")
+@RequestMapping(path = "/auth")
 @AllArgsConstructor
 public class UserController {
     private  final UserService userService;
@@ -24,7 +24,7 @@ public class UserController {
         HashMap responseData = new HashMap<>();
         var userReponse = userService.SignUpService(request);
         if(userReponse.isEmpty()){
-            response.setStatus(409);
+            response.setStatus(406);
             responseData.put("code",response.getStatus());
             responseData.put("message","Email already exists");
             return responseData;
@@ -48,5 +48,15 @@ public class UserController {
         responseData.put("data",serviceData);
         responseData.put("message","Ok");
         return responseData;
+    }
+
+    @PatchMapping(path = "/changepassword/{iduser}")
+    public UserDataDTO changePassword(@PathVariable(value = "iduser",required = true) Integer userId ,@RequestBody @Valid ResquestChangePasswordDTO request, HttpServletResponse response){
+         boolean isCheckUpdate = userService.ChangePassword(userId,request);
+         if(isCheckUpdate){
+             return new UserDataDTO(response.getStatus(),new HashMap<>(),"Ok");
+         }
+         response.setStatus(406);
+         return new UserDataDTO(response.getStatus(),new HashMap<>(),"NOT_ACCEPTABLE");
     }
 }

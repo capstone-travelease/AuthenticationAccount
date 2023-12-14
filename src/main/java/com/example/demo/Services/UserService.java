@@ -1,5 +1,6 @@
 package com.example.demo.Services;
 
+import com.example.demo.DTO.ResquestChangePasswordDTO;
 import com.example.demo.DTO.UserRequestDTO;
 import com.example.demo.Enities.UserEnity;
 import com.example.demo.Repositories.UserRepository;
@@ -16,7 +17,6 @@ import java.util.Map;
 @Service
 @AllArgsConstructor
 public class UserService {
-
     private  final UserRepository userRepository;
     public Map<String,String> SignUpService(UserRequestDTO userRequest){
         HashMap<String,String> userReturn = new HashMap<>();
@@ -41,5 +41,16 @@ public class UserService {
         userReturn.put("name", userRequest.getName());
         userReturn.put("gender",String.valueOf(userRequest.isGender()));
         return userReturn;
+    }
+
+    public boolean ChangePassword(Integer userId,ResquestChangePasswordDTO userRequest){
+        var userData = userRepository.findByUserId(userId);
+        BCryptPasswordEncoder BCrypt = new BCryptPasswordEncoder();
+        boolean isCheckPassword = BCrypt.matches(userRequest.getOldPassword(),userData);
+        if(userData == null || !isCheckPassword){
+            return false;
+        }
+        userRepository.updatePassword(userId,BCrypt.encode(userRequest.getNewPassword()));
+        return true;
     }
 }
