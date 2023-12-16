@@ -4,10 +4,20 @@ server:
     include-message: always
 
 spring:
+  gateway:
+    routes:
+      - id: spring_demo
+        uri: http://localhost:8080/api/demo
+        predicates:
+          - Path=/api/demo
+          - Method=GET
+  main:
+    web-application-type: reactive
+    allow-bean-definition-overriding: true
   datasource:
-    url: jdbc:postgresql://35.247.161.13:5432/travelmarketplace
+    url: jdbc:postgresql://localhost:5432/TravelMarketPlace
     username: postgres
-    password: capstonevlu
+    password: 123456
   jpa:
     hibernate:
       ddl-auto: none
