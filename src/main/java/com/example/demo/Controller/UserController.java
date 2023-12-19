@@ -50,8 +50,8 @@ public class UserController {
         return responseData;
     }
 
-    @PatchMapping(path = "/changepassword/{iduser}")
-    public UserDataDTO changePassword(@PathVariable(value = "iduser",required = true) Integer userId ,@RequestBody @Valid ResquestChangePasswordDTO request, HttpServletResponse response){
+    @PatchMapping(path = "/changepassword")
+    public UserDataDTO changePassword(@RequestParam(value = "iduser",required = true) Integer userId ,@RequestBody @Valid ResquestChangePasswordDTO request, HttpServletResponse response){
          boolean isCheckUpdate = userService.ChangePassword(userId,request);
          if(isCheckUpdate){
              return new UserDataDTO(response.getStatus(),new HashMap<>(),"Ok");
