@@ -5,7 +5,7 @@ server:
 
 spring:
   datasource:
-    url: jdbc:postgresql://35.247.161.13:5432/travelmarketplace
+    url: jdbc:postgresql://35.247.173.160:5432/travelmarketplace
     username: postgres
     password: capstonevlu
   jpa:
