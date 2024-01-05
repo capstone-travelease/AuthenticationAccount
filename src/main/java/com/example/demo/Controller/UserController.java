@@ -59,4 +59,13 @@ public class UserController {
          response.setStatus(406);
          return new UserDataDTO(response.getStatus(),new HashMap<>(),"NOT_ACCEPTABLE");
     }
+    @PostMapping(path = "/forgetpassword")
+    public UserDataDTO forgetPassword(@RequestBody @Valid EmailRequestDTO email,HttpServletResponse response){
+           boolean isCheck = userService.sendPassword(email.getEmail());
+           if (isCheck){
+               return new UserDataDTO(response.getStatus(),null,"OK");
+           }
+           response.setStatus(404);
+           return new UserDataDTO(response.getStatus(),null,"Error");
+    }
 }

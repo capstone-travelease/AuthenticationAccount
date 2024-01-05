@@ -32,4 +32,12 @@ public interface UserRepository extends JpaRepository<UserEnity,Integer> {
             "\tSET password=?2\n" +
             "\tWHERE users.user_id=?1",nativeQuery = true)
     void updatePassword(Integer iduser,String newPassword);
+
+
+    @Transactional
+    @Modifying(clearAutomatically = true)
+    @Query(value = "UPDATE public.users\n" +
+            "\tSET password=?2\n" +
+            "\tWHERE users.email=?1",nativeQuery = true)
+    void forgotPassword(String email, String password);
 }
