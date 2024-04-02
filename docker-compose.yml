@@ -1,8 +1,8 @@
 version: "3.3"
 services:
   login:
-    container_name: spring-login
-    image: coderbillzay/spring-login
+    container_name: authen-account
+    image: coderbillzay/authen-account
     ports:
       - '1234:1234'
     volumes:
