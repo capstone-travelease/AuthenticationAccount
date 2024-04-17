@@ -36,7 +36,7 @@ public class UserService {
                 new BCryptPasswordEncoder().encode(userRequest.getPassword()),
                 null,
                 null,
-               3
+               1
         );
         userRepository.save(user);
         userReturn.put("email",userRequest.getEmail());
