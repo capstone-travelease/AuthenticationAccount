@@ -6,7 +6,7 @@ server:
 spring:
   servlet:
   datasource:
-    url: jdbc:postgresql://34.142.153.7:5432/travelmarketplace
+    url: jdbc:postgresql://34.126.137.107:5432/travelmarketplace
     username: postgres
     password: capstonevlu
   jpa:
